@@ -1,25 +1,38 @@
 <template>
-  <div class="about">
-    <h1>Try</h1>
-    <div>
-    <label class="typo__label">Tagging</label>
-    <multiselect v-model="value" tag-placeholder="Add this as new tag" placeholder="Search or add a tag" label="name" track-by="code" :options="options" :multiple="true" :taggable="true" @tag="addTag"></multiselect>
-    <pre class="language-json"><code>{{ value  }}</code></pre>
+  <div>
+      <h2>多選的select</h2>
+      <div>
+        <label class="typo__label">Tagging</label>
+        <multiselect v-model="value" tag-placeholder="Add this as new tag" 
+          placeholder="Search or add a tag" label="name" 
+          track-by="code" :options="options" :multiple="true" 
+          :taggable="true"></multiselect>
+        <!-- <pre class="language-json"><code>{{ value  }}</code></pre> -->
+      </div>
+  
+  
   </div>
-  </div>
-</template>
 
+</template>
 <script>
 //https://vue-multiselect.js.org/
 //官方文件
+//import VueMultiselect from 'vue-multiselect'
 
-import MultiSelectFunc from '../../src/components/multiSelect.js';
+// export default {
+//   components: { VueMultiselect },
+//   data () {
+//     return {
+//       selected: null,
+//       options: ['list', 'of', 'options']
+//     }
+//   }
+// }
+
+import Multiselect from 'vue-multiselect';
+
 export default {
-
- // Vue.component('vue-multiselect', window.VueMultiselect.default);
-  components: {
-    Multiselect
-  },
+  components: { Multiselect },
   data () {
     return {
       value: [
@@ -28,36 +41,22 @@ export default {
       options: [
         { name: 'Vue.js', code: 'vu' },
         { name: 'Javascript', code: 'js' },
-        { name: 'Open Source', code: 'os' }
+        { name: 'Open Source', code: 'os' },
+        { name: 'B', code: 'B' },
+        { name: 'C', code: 'C' }
       ]
     }
   },
   methods: {
-    addTag (newTag) {
-      const tag = {
-        name: newTag,
-        code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-      }
-      this.options.push(tag)
-      this.value.push(tag)
-    }
-  },
-  created(){
-    MultiSelectFunc();
+    // addTag (newTag) {
+    //   const tag = {
+    //     name: newTag,
+    //     code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
+    //   }
+    //   this.options.push(tag)
+    //   this.value.push(tag)
+    // }
   }
 }
-
 </script>
-
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-  div{
-    flex-wrap: wrap;
-  }
-}
-</style>
+<style src="vue-multiselect/dist/vue-multiselect.css"></style>
